@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Discover</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="error_connection">Please check your connection.</string>
+    <string name="description_unavailable">Description unavailable.</string>
+    <string name="rating">%1$s out of 5</string>
+    <string name="rating_unavailable">Rating unavailable.</string>
+</resources>
