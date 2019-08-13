@@ -46,7 +46,7 @@ public class DetailsPresenterTest {
     @Test
     public void shouldDeliverDetailsToView() {
 
-        RestaurantDetails restaurantDetails = new RestaurantDetails(0.0, "","");
+        RestaurantDetails restaurantDetails = new RestaurantDetails(null, 0.0, "","");
 
         Mockito.when(view.getId()).thenReturn(0L);
         Mockito.when(restaurantsDataSource.getRestaurantDetails(0)).thenReturn(Single.just(restaurantDetails));
