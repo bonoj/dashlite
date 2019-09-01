@@ -11,6 +11,7 @@ class RestaurantsRepository(private val context: Context) : RestaurantsDataSourc
     // Local cache
     val restaurants = ArrayList<Restaurant>()
 
+
     // Remote
     private val apiService = DashLiteApiUtils.apiService
     private val lat = 37.422740

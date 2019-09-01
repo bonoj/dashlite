@@ -1,9 +1,12 @@
 package com.bonoj.dashlite.restaurants
 
 import android.content.Context
+import android.opengl.Visibility
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +22,7 @@ class RestaurantsAdapter(private val context: Context,
     private val inflater = LayoutInflater.from(context)
 
     private var restaurants: ArrayList<Restaurant> = ArrayList()
+    private val favoriteRestaurants: ArrayList<Restaurant> = ArrayList()
 
     interface ItemClickListener {
         fun onItemClick(view: View, position: Int)
@@ -57,6 +61,13 @@ class RestaurantsAdapter(private val context: Context,
         holder.nameTv.text = name
         holder.tagsTv.text = tagsString
         holder.statusTv.text = status ?: context.getString(R.string.unavailable)
+        holder.favoriteBtn.setOnClickListener {
+            toggleFavorite(restaurants[position])
+        }
+
+        // Temporarily disable and hide button
+        holder.favoriteBtn.isEnabled = false
+        holder.favoriteBtn.visibility = View.INVISIBLE
     }
 
     override fun getItemCount(): Int {
@@ -68,6 +79,7 @@ class RestaurantsAdapter(private val context: Context,
         var nameTv: TextView = itemView.list_item_name_tv
         var tagsTv: TextView = itemView.list_item_tags_tv
         var statusTv: TextView = itemView.list_item_status_tv
+        var favoriteBtn: Button = itemView.list_item_favorite
 
         init {
             itemView.setOnClickListener(this)
@@ -99,5 +111,17 @@ class RestaurantsAdapter(private val context: Context,
 
     fun refillAdapterAfterDeviceRotation(preexistingRestaurants: List<Restaurant>) {
         restaurants.addAll(preexistingRestaurants)
+    }
+
+    fun toggleFavorite(restaurant: Restaurant) {
+        if (!favoriteRestaurants.contains(restaurant)) {
+            favoriteRestaurants.add(restaurant)
+        } else {
+            favoriteRestaurants.remove(restaurant)
+        }
+    }
+
+    fun getFavoriteRestaurants() : ArrayList<Restaurant> {
+        return favoriteRestaurants
     }
 }
